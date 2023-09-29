@@ -9,6 +9,7 @@ public class Presenter {
     public Presenter(View view, AnimalNursery animalNursery){
         this.view = view;
         this.animalNursery = animalNursery;
+        view.setPresenter(this);
     }
     public void showAll(){
         String info = animalNursery.showAll();
@@ -22,8 +23,8 @@ public class Presenter {
         animalNursery.addAnimal(typeOfAnimal, name, dateBirthStr);
     }
     public void addCommand(int idCommand, int id){
-        if (animalNursery.addCommand(idCommand, id)) view.ptint("Команда добавлена");
-        else view.ptint("Ошибка ввода");
+        if (animalNursery.addCommand(idCommand, id)) {view.ptint("Команда добавлена");}
+        else {view.ptint("Ошибка ввода");}
     }
 
 }

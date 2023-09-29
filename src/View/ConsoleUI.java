@@ -57,33 +57,40 @@ public class ConsoleUI implements View{
     }
     private void showCommands(){
         System.out.println("Введите id животного: ");
+        try{
+            int id = Integer.parseInt(scanner.nextLine());
+            presenter.showCommands(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
-        int id = scanner.nextInt();
+
+
 
     }
     private void addAnimal(){
         System.out.println("Выберите тип животного (введите соответствующее число):\n" +
                 "1. Собака 2. Кот 3. Хомяк 4. Лошадь 5. Верблюд 6. Осел");
 
-        int type = scanner.nextInt();
+        String type = scanner.nextLine();
         StringBuilder typeOfAnimal = new StringBuilder();
         switch (type){
-            case 1:
+            case "1":
                 typeOfAnimal.append("Dog");
                 break;
-            case 2:
+            case "2":
                 typeOfAnimal.append("Cat");
                 break;
-            case 3:
+            case "3":
                 typeOfAnimal.append("Hamster");
                 break;
-            case 4:
+            case "4":
                 typeOfAnimal.append("Horse");
                 break;
-            case 5:
+            case "5":
                 typeOfAnimal.append("Camel");
                 break;
-            case 6:
+            case "6":
                 typeOfAnimal.append("Donkey");
                 break;
             default:
@@ -91,23 +98,32 @@ public class ConsoleUI implements View{
         }
         System.out.println("Введите имя:");
         String name = scanner.nextLine();
+        //Scanner sc = new Scanner(System.in);
         System.out.println("Введите дату рождения в формате dd/mm/yyyy: ");
         String dateBirthStr = scanner.nextLine();
+        //sc.close();
         presenter.addAnimal(typeOfAnimal.toString(), name, dateBirthStr);
 
     }
     private void addCommand(){
-        System.out.println("Введите id животного: ");
-        int id = scanner.nextInt();
-        System.out.println("Выберите команду (только число)" +
-                "1. GO 2. STOP 3. RUN_AWAY 4. COME_UP 5. LIE 6. JUMP 7. TRUP 8. STAND_UP");
-        int idCommand = scanner.nextInt();
-        presenter.addCommand(idCommand, id);
+
+        try{
+            System.out.println("Введите индекс животного: ");
+            int id = Integer.parseInt(scanner.nextLine());
+            System.out.println("Выберите команду (только число)" +
+                    "1. GO 2. STOP 3. RUN_AWAY 4. COME_UP 5. LIE 6. JUMP 7. TRUP 8. STAND_UP");
+            int idCommand = Integer.parseInt(scanner.nextLine());
+            presenter.addCommand(idCommand, id);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
 
 
     }
     private void exit(){
-       work = false;
+       scanner.close();
+        work = false;
     }
 
 }
